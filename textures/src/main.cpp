@@ -1,8 +1,10 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
-#include "shader.h"
+
+#include "shaders/shader.h"
 #include "vendor/stb_image.h"
+
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 void processInput(GLFWwindow *window);
@@ -31,8 +33,8 @@ int main() {
     std::cout << "Failed to initialize GLAD" << std::endl;
     return -1;
   }
-
-  Shader shaders("./src/shaders/vertex.glsl", "./src/shaders/fragment.glsl");
+  
+  Shader shaders("src/resources/shaders/vertex.glsl", "src/resources/shaders/fragment.glsl");
 
   float vertices[] = {
     // positions          // colors           // texture coords
@@ -83,7 +85,7 @@ int main() {
 
   stbi_set_flip_vertically_on_load(true);
   int width, height, nrChannels;
-  u_char *data = stbi_load("./src/imgs/container.jpg", &width, &height, &nrChannels, 0);
+  u_char *data = stbi_load("./src/resources/imgs/container.jpg", &width, &height, &nrChannels, 0);
 
   if (data) {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -103,7 +105,7 @@ int main() {
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-  data = stbi_load("./src/imgs/awesomeface.png", &width, &height, &nrChannels, 0);
+  data = stbi_load("./src/resources/imgs/awesomeface.png", &width, &height, &nrChannels, 0);
 
   if (data) {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
